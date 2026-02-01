@@ -1,0 +1,260 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-surface-3;
+  }
+  
+  body {
+    @apply bg-surface-0 text-zinc-100;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::selection {
+    @apply bg-genesis-500/30 text-white;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-surface-1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-3 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-surface-4;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-surface-1/80 backdrop-blur-xl border border-white/5;
+  }
+
+  .glass-strong {
+    @apply bg-surface-1/95 backdrop-blur-2xl border border-white/10;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-genesis-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, theme('colors.genesis.500'), theme('colors.fuchsia.500'), theme('colors.pink.500'));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .btn-primary {
+    @apply relative overflow-hidden px-6 py-3 rounded-xl font-semibold text-white;
+    @apply bg-gradient-to-r from-genesis-600 to-fuchsia-600;
+    @apply hover:from-genesis-500 hover:to-fuchsia-500;
+    @apply transition-all duration-300;
+    @apply shadow-lg shadow-genesis-500/25 hover:shadow-xl hover:shadow-genesis-500/40;
+    @apply active:scale-[0.98];
+  }
+
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-white/0 via-white/25 to-white/0;
+    @apply -translate-x-full;
+    animation: shimmer 2s infinite;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-xl font-semibold;
+    @apply bg-surface-2 text-white;
+    @apply border border-surface-3;
+    @apply hover:bg-surface-3 hover:border-surface-4;
+    @apply transition-all duration-200;
+    @apply active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 rounded-lg font-medium;
+    @apply text-zinc-400 hover:text-white;
+    @apply hover:bg-white/5;
+    @apply transition-all duration-200;
+  }
+
+  .input {
+    @apply w-full px-4 py-3 rounded-xl;
+    @apply bg-surface-2 border border-surface-3;
+    @apply text-white placeholder:text-zinc-500;
+    @apply focus:outline-none focus:border-genesis-500 focus:ring-2 focus:ring-genesis-500/20;
+    @apply transition-all duration-200;
+  }
+
+  .card {
+    @apply glass rounded-2xl p-6;
+    @apply shadow-xl shadow-black/20;
+  }
+
+  .card-hover {
+    @apply card cursor-pointer;
+    @apply hover:bg-surface-1/90 hover:border-white/10;
+    @apply hover:shadow-2xl hover:shadow-genesis-500/10;
+    @apply transition-all duration-300;
+  }
+
+  .step-indicator {
+    @apply flex items-center justify-center;
+    @apply w-10 h-10 rounded-full;
+    @apply text-sm font-bold;
+    @apply transition-all duration-500;
+  }
+
+  .step-indicator.active {
+    @apply bg-gradient-to-r from-genesis-500 to-fuchsia-500;
+    @apply text-white shadow-lg shadow-genesis-500/50;
+  }
+
+  .step-indicator.completed {
+    @apply bg-emerald-500 text-white;
+  }
+
+  .step-indicator.pending {
+    @apply bg-surface-2 text-zinc-500 border border-surface-3;
+  }
+
+  .floating-orb {
+    @apply absolute rounded-full blur-3xl opacity-30;
+    @apply animate-float;
+  }
+
+  .table-cell {
+    @apply px-4 py-3 text-sm;
+    @apply border-b border-surface-2;
+  }
+
+  .table-header {
+    @apply px-4 py-3 text-xs font-semibold uppercase tracking-wider;
+    @apply text-zinc-400 bg-surface-1;
+    @apply border-b border-surface-2;
+  }
+
+  .color-swatch {
+    @apply w-8 h-8 rounded-lg border-2 border-white/20;
+    @apply shadow-lg cursor-pointer;
+    @apply hover:scale-110 hover:border-white/40;
+    @apply transition-all duration-200;
+  }
+
+  .progress-bar {
+    @apply h-2 rounded-full bg-surface-2 overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full rounded-full;
+    @apply bg-gradient-to-r from-genesis-500 via-fuchsia-500 to-pink-500;
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .image-card {
+    @apply relative rounded-xl overflow-hidden;
+    @apply bg-surface-2 border border-surface-3;
+    @apply group cursor-pointer;
+    @apply hover:border-genesis-500/50;
+    @apply transition-all duration-300;
+  }
+
+  .image-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent;
+    @apply opacity-0 group-hover:opacity-100;
+    @apply transition-opacity duration-300;
+    @apply z-10;
+  }
+
+  .tab {
+    @apply px-6 py-3 rounded-xl font-medium;
+    @apply text-zinc-400;
+    @apply hover:text-white hover:bg-white/5;
+    @apply transition-all duration-200;
+  }
+
+  .tab.active {
+    @apply text-white bg-surface-2;
+    @apply shadow-lg;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-success {
+    @apply badge bg-emerald-500/20 text-emerald-400 border border-emerald-500/30;
+  }
+
+  .badge-warning {
+    @apply badge bg-amber-500/20 text-amber-400 border border-amber-500/30;
+  }
+
+  .badge-error {
+    @apply badge bg-red-500/20 text-red-400 border border-red-500/30;
+  }
+
+  .badge-info {
+    @apply badge bg-genesis-500/20 text-genesis-400 border border-genesis-500/30;
+  }
+
+  .tooltip {
+    @apply absolute z-50 px-3 py-2 text-sm;
+    @apply bg-surface-1 border border-surface-3 rounded-lg;
+    @apply shadow-xl;
+    @apply opacity-0 pointer-events-none;
+    @apply transition-all duration-200;
+  }
+
+  .has-tooltip:hover .tooltip {
+    @apply opacity-100;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+}
