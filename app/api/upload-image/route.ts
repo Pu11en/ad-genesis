@@ -43,8 +43,4 @@ export async function POST(request: Request) {
   }
 }
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// App Router handles formData natively - no config needed
