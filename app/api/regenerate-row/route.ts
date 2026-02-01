@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+function getOpenAI() {
+  return new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+}
 
 export async function POST(request: Request) {
+  const openai = getOpenAI();
   try {
     const { rowIndex, productName, brandName, colors, currentRow } = await request.json();
 

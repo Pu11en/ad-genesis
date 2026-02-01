@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+function getOpenAI() {
+  return new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+}
 
 const SYSTEM_PROMPT = `You are Ideator GPT, a specialized assistant that generates structured visual concept tables for creative, marketing, and advertising ideation.
 
@@ -26,6 +26,7 @@ Rules:
 Output as a JSON array of objects.`;
 
 export async function POST(request: Request) {
+  const openai = getOpenAI();
   try {
     const { adCount, productName, brandName, watermark, colors, productAnalysis, style } = await request.json();
 

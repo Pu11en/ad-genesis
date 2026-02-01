@@ -4,9 +4,9 @@ import OpenAI from 'openai';
 const KIE_API_KEY = process.env.KIE_API_KEY;
 const KIE_API_BASE = 'https://api.kie.ai/api/v1';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+function getOpenAI() {
+  return new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+}
 
 // System prompt for image prompt generation (from the n8n workflow)
 const IMAGE_PROMPT_SYSTEM = `## SYSTEM PROMPT: 🍳 Image Ad Prompt Generator Agent
@@ -40,6 +40,7 @@ Rules:
 - Keep colors consistent with the brand palette`;
 
 export async function POST(request: Request) {
+  const openai = getOpenAI();
   try {
     const { row, model, productImageUrl } = await request.json();
 
