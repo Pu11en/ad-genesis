@@ -174,7 +174,7 @@
   .image-card {
     @apply relative rounded-xl overflow-hidden;
     @apply bg-surface-2 border border-surface-3;
-    @apply group cursor-pointer;
+    @apply cursor-pointer;
     @apply hover:border-genesis-500/50;
     @apply transition-all duration-300;
   }
